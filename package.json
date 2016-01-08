@@ -1,0 +1,15 @@
+{
+  "name": "evanp-http-proxy",
+  "description": "Simple HTTP proxy using env variables for config",
+  "repository": "https://github.com/evanp/http-proxy.git",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "cake build",
+    "clean": "cake clean",
+    "start": "coffee src/main.coffee"
+  },
+  "dependencies": {
+    "http-proxy": "^1.12.0",
+    "coffee-script": "^1.10.0"
+  }
+}
