@@ -1,4 +1,8 @@
-#
+# To the extent possible under law, Evan Prodromou has waived all copyright and
+# related or neighboring rights to evanp/http-proxy.
+# This work is published from: Canada.
+# http://creativecommons.org/publicdomain/zero/1.0/
+
 httpProxy = require 'http-proxy'
 
 config =
