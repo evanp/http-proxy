@@ -17,4 +17,9 @@ if config.key
 else
   proxy = httpProxy.createProxyServer({target: config.target})
 
+# Handle error by blooping out to console
+
+proxy.on 'error', (err) ->
+  console.error err
+
 proxy.listen(config.port)
