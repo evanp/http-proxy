@@ -12,9 +12,9 @@
     "push": "docker push evanp/http-proxy:${npm_package_version} && docker push evanp/http-proxy:latest"
   },
   "dependencies": {
-    "http-proxy": "^1.12.0"
+    "http-proxy": "^1.16.2"
   },
   "devDependencies": {
-    "coffee-script": "^1.10.0"
+    "coffee-script": "^1.12.4"
   }
 }

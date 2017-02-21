@@ -9,23 +9,44 @@ httpProxy = require 'http-proxy'
 config =
   target: process.env.TARGET
 
-if process.env.KEY_FILE
+if process.env.KEY_FILE?
   config.key = fs.readFileSync(process.env.KEY_FILE)
   config.cert = fs.readFileSync(process.env.CERT_FILE)
 else if process.env.KEY?
   config.key = process.env.KEY
   config.cert = process.env.CERT
 
-config.port = if process.env.PORT then parseInt(process.env.PORT, 10) else if config.key then 443 else 80
-
-if config.key
-  proxy = httpProxy.createProxyServer({target: config.target, ssl: {key: config.key, cert: config.cert}})
+if process.env.PORT?
+  config.port = parseInt(process.env.PORT, 10)
+else if config.key?
+  config.port = 443
 else
-  proxy = httpProxy.createProxyServer({target: config.target})
+  config.port = 80
 
-# Handle error by blooping out to console
+props =
+  target: config.target
 
-proxy.on 'error', (err) ->
-  console.error err
+if config.key?
+  props.ssl =
+    key: config.key
+    cert: config.cert
 
-proxy.listen(config.port)
+proxy = httpProxy.createProxyServer props
+
+proxy.on 'error', (req, res, err) ->
+
+  message = "#{err.name}: #{err.message}"
+
+  console.log "#{req.url} -> #{message}"
+
+  res.writeHead 500,
+    'Content-Length': Buffer.byteLength(message)
+    'Content-Type': 'text/plain'
+
+  res.end message
+
+proxy.listen config.port
+
+process.on 'SIGTERM', ->
+  console.log "Shutting down..."
+  proxy.close()
