@@ -3,12 +3,18 @@
 # This work is published from: Canada.
 # http://creativecommons.org/publicdomain/zero/1.0/
 
+fs = require 'fs'
 httpProxy = require 'http-proxy'
 
 config =
   target: process.env.TARGET
-  key: process.env.KEY
-  cert: process.env.CERT
+
+if process.env.KEY_FILE
+  config.key = fs.readFileSync(process.env.KEY_FILE)
+  config.cert = fs.readFileSync(process.env.CERT_FILE)
+else if process.env.KEY?
+  config.key = process.env.KEY
+  config.cert = process.env.CERT
 
 config.port = if process.env.PORT then parseInt(process.env.PORT, 10) else if config.key then 443 else 80
 
