@@ -33,23 +33,19 @@ if config.key?
 
 proxy = httpProxy.createProxyServer props
 
-proxy.on 'proxyReq', (req, res) ->
-  console.log "#{req.url} started"
-
-proxy.on 'proxyRes', (req, res) ->
-  console.log "#{req.url} completed"
-
 proxy.on 'error', (req, res, err) ->
 
   message = "#{err.name}: #{err.message}"
 
   console.log "#{req.url} -> #{message}"
 
-  res.writeHead 500,
-    'Content-Length': Buffer.byteLength(message)
-    'Content-Type': 'text/plain'
+  if res?
 
-  res.end message
+    res.writeHead 500,
+      'Content-Length': Buffer.byteLength(message)
+      'Content-Type': 'text/plain'
+
+    res.end message
 
 proxy.listen config.port
 
