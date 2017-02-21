@@ -5,10 +5,17 @@
   "version": "0.2.0",
   "license": "CC0-1.0",
   "scripts": {
-    "start": "coffee src/main.coffee"
+    "start": "node lib/main.js",
+    "clean": "rm -rf lib/*.js",
+    "build": "coffee -c -o lib src",
+    "postinstall": "npm run-script build",
+    "docker": "docker build -t evanp/http-proxy:${npm_package_version} . && docker tag evanp/http-proxy:${npm_package_version} evanp/http-proxy:latest",
+    "push": "docker push evanp/http-proxy:${npm_package_version} && docker push evanp/http-proxy:latest"
   },
   "dependencies": {
-    "http-proxy": "^1.12.0",
+    "http-proxy": "^1.12.0"
+  },
+  "devDependencies": {
     "coffee-script": "^1.10.0"
   }
 }
