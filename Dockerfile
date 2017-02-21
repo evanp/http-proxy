@@ -7,7 +7,6 @@ WORKDIR /src/
 ADD . .
 
 RUN npm install
-RUN npm run-script build
 
 EXPOSE 80
 EXPOSE 443
