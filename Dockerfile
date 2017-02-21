@@ -14,4 +14,4 @@ EXPOSE 80
 EXPOSE 443
 
 ENTRYPOINT ["/usr/local/bin/dumb-init", "--"]
-CMD ["/usr/local/bin/node", "lib/main.js"]
+CMD ["/usr/bin/node", "lib/main.js"]
