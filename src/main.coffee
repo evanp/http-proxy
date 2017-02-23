@@ -23,6 +23,11 @@ else if config.key?
 else
   config.port = 80
 
+if process.env.ADDRESS?
+  config.address = process.env.ADDRESS
+else
+  config.address = "0.0.0.0"
+
 props =
   target: config.target
 
@@ -47,7 +52,7 @@ proxy.on 'error', (req, res, err) ->
 
     res.end message
 
-proxy.listen config.port
+proxy.listen config.port, config.address
 
 process.on 'SIGTERM', ->
   console.log "Shutting down..."

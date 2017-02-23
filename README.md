@@ -26,3 +26,4 @@ Configuration
 * ***PORT*** The port to listen on. Defaults to 80 if there's no KEY, or 443 if
   there is one.
 * ***TARGET*** The target URL. Every request will be forwarded to this URL.
+* ***ADDRESS*** The address to listen on. By default, listens on '0.0.0.0'.
