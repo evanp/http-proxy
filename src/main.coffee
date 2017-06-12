@@ -6,6 +6,10 @@
 fs = require 'fs'
 httpProxy = require 'http-proxy'
 
+debug = require('debug')('evanp-http-proxy')
+
+js = JSON.stringify
+
 config =
   target: process.env.TARGET
 
@@ -28,14 +32,18 @@ if process.env.ADDRESS?
 else
   config.address = "0.0.0.0"
 
+debug "config = #{js config}"
+
 props =
   target: config.target
-  xfd: true
+  xfwd: true
 
 if config.key?
   props.ssl =
     key: config.key
     cert: config.cert
+
+debug "props = #{js props}"
 
 proxy = httpProxy.createProxyServer props
 
@@ -54,6 +62,8 @@ proxy.on 'error', (req, res, err) ->
     res.end message
 
 proxy.listen config.port, config.address
+
+console.log "Server listening"
 
 process.on 'SIGTERM', ->
   console.log "Shutting down..."
