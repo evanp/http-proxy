@@ -30,6 +30,7 @@ else
 
 props =
   target: config.target
+  xfd: true
 
 if config.key?
   props.ssl =
