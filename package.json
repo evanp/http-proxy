@@ -2,7 +2,7 @@
   "name": "evanp-http-proxy",
   "description": "Simple HTTP proxy using env variables for config",
   "repository": "https://github.com/evanp/http-proxy.git",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "license": "CC0-1.0",
   "scripts": {
     "start": "node lib/main.js",
