@@ -6,9 +6,7 @@
   "license": "CC0-1.0",
   "scripts": {
     "start": "node lib/main.js",
-    "clean": "rm -rf lib/*.js test/*.js",
-    "build": "npm run-script clean && coffee -c -o lib src && coffee -c test",
-    "test": "npm run-script build && perjury test/*-test.js",
+    "test": "perjury test/*-test.js",
     "docker": "docker build -t evanp/http-proxy:${npm_package_version} . && docker tag evanp/http-proxy:${npm_package_version} evanp/http-proxy:latest",
     "push": "docker push evanp/http-proxy:${npm_package_version} && docker push evanp/http-proxy:latest"
   },
@@ -17,7 +15,6 @@
     "http-proxy": "^1.16.2"
   },
   "devDependencies": {
-    "coffee-script": "^1.12.7",
     "perjury": "^1.1.0"
   }
 }

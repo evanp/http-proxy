@@ -5,10 +5,9 @@ RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/
 RUN chmod +x /usr/local/bin/dumb-init
 
 WORKDIR /src/
-ADD . .
+COPY . .
 
 RUN npm install
-RUN npm run-script build
 
 EXPOSE 80
 EXPOSE 443
