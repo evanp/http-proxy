@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node lib/main.js",
     "test": "perjury test/*-test.js",
+    "lint": "eslint lib/*.js test/*.js",
     "docker": "docker build -t evanp/http-proxy:${npm_package_version} . && docker tag evanp/http-proxy:${npm_package_version} evanp/http-proxy:latest",
     "push": "docker push evanp/http-proxy:${npm_package_version} && docker push evanp/http-proxy:latest"
   },
@@ -15,6 +16,12 @@
     "http-proxy": "^1.16.2"
   },
   "devDependencies": {
+    "eslint": "^4.13.1",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
     "perjury": "^1.1.0"
   }
 }
